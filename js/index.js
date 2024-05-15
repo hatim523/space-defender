@@ -11,8 +11,17 @@ const createGame = async () => {
     // Adding layer to stage
     stage.add(layer);
 
+    const backgroundImage = new Konva.Image({
+        image: await loadImage('bg.svg'),
+
+        width: 800,
+        height: 600,
+    });
+
+    layer.add(backgroundImage);
+
     const konvaSpaceShipImage = new Konva.Image({
-        image: await loadImageHelper('main-jet-2.svg'),
+        image: await loadImage('main-jet-2.svg'),
         height: 100,
         width: 130,
 

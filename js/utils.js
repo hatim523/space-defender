@@ -1,5 +1,5 @@
 
-const loadImageHelper = (imageName) => {
+const loadImage = (imageName) => {
     return new Promise((resolve, reject) => {
         const image =  new Image();
 
@@ -14,10 +14,6 @@ const loadImageHelper = (imageName) => {
 
         image.src = `../pix/${imageName}`;
     });
-}
-
-const loadImage = async (imageName) => {
-    return await loadImageHelper(imageName);
 }
 
 const detectCollision = (node1, node2) => {
