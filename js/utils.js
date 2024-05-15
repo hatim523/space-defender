@@ -28,3 +28,42 @@ const haveIntersection = (r1, r2) => {
         r2.y + r2.height < r1.y
     );
 }
+
+const getRandomInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const destroyObjAnimation = (konvaNode) => {
+    if (!konvaNode) {
+        console.error("empty node", konvaNode);
+        return;
+    }
+
+    loadImage('destroy.svg').then((destroyImage) => {
+        const [height, width] = [konvaNode.height(), konvaNode.width()];
+
+        new Konva.Tween({
+            node: konvaNode,
+            opacity: 0,
+            duration: 0.2,
+            onFinish: () => {
+                konvaNode.image(destroyImage);
+                konvaNode.height(height);
+                konvaNode.width(width);
+                konvaNode.opacity(1);
+    
+                new Konva.Tween({
+                    node: konvaNode,
+                    opacity: 0,
+                    duration: 0.2,
+                    onFinish: () => {
+                        konvaNode.destroy();
+                    }
+                }).play();
+            }
+        }).play();
+    })
+
+}
